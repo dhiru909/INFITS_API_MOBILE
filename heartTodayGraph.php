@@ -16,6 +16,7 @@ $sql = "select cast(date as time),cast(date as date),value from heartrate where 
 
 $full = NULL;
 
+
 $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
 
     $emparray = array();

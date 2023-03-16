@@ -15,7 +15,7 @@ public class Auto {
                     data += reader.nextLine();
                     data += "\n";
                 }
-                data = data.replace("$server=\"127.0.0.1:4307\";\n$username=\"root\";\n$password=\"\";\n$database = \"infits\";", "require \"connect.php\";"); 
+                data = data.replace("$server=\"127.0.0.1:3306\";\n$username=\"root\";\n$password=\"\";\n$database = \"infits\";", "require \"connect.php\";"); 
                 FileWriter myWriter = new FileWriter(file);
                 // System.out.println(data);
                 myWriter.write(data);

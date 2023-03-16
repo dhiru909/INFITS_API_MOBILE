@@ -1,15 +1,6 @@
 <?php
-$server="127.0.0.1:3307";
-$username="root";
-$password="";
-$database = "infits";
 
-$conn=mysqli_connect($server,$username,$password,$database);
-
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-
+require "connect.php";
 
 $today = date('Y-m-d');
 

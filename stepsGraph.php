@@ -9,19 +9,19 @@ function date_compare($a, $b)
 require "connect.php";
 
 
-$clientID = $_POST['clientuserID'];
+//$clientID = $_POST['clientuserID'];
 
-// $clientID = 'dilip';
+$clientID = 'Azarudeen';
 
-// $from = date('Y-m-d', strtotime("-6 day"));
+$from = 2022-12-12;
 
-$from = $_POST["dateStart"];
+//$from = $_POST["dateStart"];
 
-$to = $_POST["dateEnd"];
+//$to = $_POST["dateEnd"];
 
-// $to = date('Y-m-d');
+$to = 2022-12-18;
 
-$end = date('Y-m-d',strtotime("1 day"));
+$end = 2022-12-18;
 
 
 $sql = "SELECT * FROM steptracker where clientID = '$clientID' and cast(dateandtime as date) between '$from' and '$to' GROUP BY cast(dateandtime as date) order by dateandtime";

@@ -1,21 +1,14 @@
 <?php 
-$server="127.0.0.1:3306";
-$username="root";
-$password="";
-$database = "infits_app";
-// Create connection
-$conn=mysqli_connect($server,$username,$password,$database);
-$error=false;
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+require "connect.php";
 
-  if (empty($_POST["userID"])|| empty($_POST["password"])) {
+
+$error = false;
+if (empty($_POST["userID"]) || empty($_POST["password"])) {
    // echo $_POST["userID"];
   
     $error = true;
-  }
-  $stat=array("Status");
+}
+$stat=array("Status");
 $cases=array("Failure","Success");
 $updt=array();
 $products=array();
@@ -29,7 +22,7 @@ if ($error) {
   $updt = array("Status"=>$cases[1]);
   //echo json_encode($updt1);    
   $user_name = $_POST["userID"];
-$user_pass = $_POST["password"];
+  $user_pass = $_POST["password"];
 
     $sql = "select * from client where clientuserID=? and password=?";
 
@@ -82,6 +75,4 @@ $user_pass = $_POST["password"];
     }    
     
 }
-
-
 ?>

@@ -15,7 +15,7 @@ $height = $_POST['height'];
 $weight = $_POST['weight'];
 $verification = $_POST['verification'];
 $sql = "insert into client (clientuserID,password,name,email,mobile,gender,age,verification,height,weight) VALUES ('$userID','$password',
-	'$name','$email','$mobile','$gender','$age','$verification','$height','$weight');";
+	'$name','$email','$mobile','$gender','$age','$verification','$weight','$height');";
     try {
         if($conn->query($sql)){
             echo "success";

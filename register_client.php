@@ -1,8 +1,6 @@
 <?php
-require "connect.php";
-// Create connection
-$conn=mysqli_connect($server,$username,$password,$database);
 
+$conn = new mysqli("www.db4free.net", "infits_free_test", "EH6.mqRb9QBdY.U","infits_db");
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
@@ -11,13 +9,18 @@ $password = $_POST['password'];
 $userID = $_POST['userID'];
 $name = $_POST['name'];
 $mobile = $_POST['phone'];
-$sql = "insert into client (clientuserID,password,name,email,mobile) VALUES ('$userID','$password',
-	'$name','$email','$mobile');";
+$age = $_POST['age'];
+$gender=$_POST['gender'];
+$height = $_POST['height'];
+$weight = $_POST['weight'];
+$verification = $_POST['verification'];
+$sql = "insert into client (clientuserID,password,name,email,mobile,gender,age,verification,height,weight) VALUES ('$userID','$password',
+	'$name','$email','$mobile','$gender','$age','$verification','$height','$weight');";
     try {
         if($conn->query($sql)){
             echo "success";
         }
     } catch (mysqli_sql_exception $th) {
-        echo "UserName already taken";
+        echo $th;
     }
 ?>

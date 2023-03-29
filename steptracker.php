@@ -1,11 +1,7 @@
 <?php
 
-$server="127.0.0.1:4307";
-$username="root";
-$password="";
-$database = "sample";
+$conn=new mysqli("www.db4free.net","infits_free_test","EH6.mqRb9QBdY.U","infits_db");
 
-$conn=mysqli_connect($server,$username,$password,$database);
 
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
@@ -33,36 +29,29 @@ $calories = $_POST['calories'];
 // $calories = '34';
 
 
-// $sql = "select steps from steptracker where clientID='$userID' and dateandtime = '$dateandtime'";
+ $sql = "select steps from steptracker where clientID='$userID' and dateandtime = '$dateandtime'";
+	$result = mysqli_query($conn, $sql);
 
-// $result = mysqli_query($conn, $sql);
-
-// if(mysqli_num_rows($result) == 0){
-//     $sql = "insert into steptracker values('$steps','$dateandtime','$avgspeed','$distance','$calories','$goal','$userID')";
-// if (mysqli_query($conn,$sql)) {
-//     echo "updated 1st";
-// }
-// else{
-//     echo "error";
-// }
-// }
-// else{
-//     $sql = "update steptracker set steps = '$steps',goal = '$goal' where dateandtime = '$dateandtime' and clientID = '$userID'";
-//     if (mysqli_query($conn,$sql)) {
-//         echo "updated 2nd";
-//     }
-//     else{
-//         echo "error";
-//     }   
-// }
-
-    $sql = "insert into steptracker values('$steps','$dateandtime','$avgspeed','$distance','$calories','$goal','$userID')";
-if (mysqli_query($conn,$sql)) {
-    echo "updated";
+ if(mysqli_num_rows($result) == 0){
+     $sql = "insert into steptracker values('$steps','$dateandtime','$avgspeed','$distance','$calories','$goal','$userID')";
+ if (mysqli_query($conn,$sql)) {
+     echo "New Insert 1st";
+ }
+ else{
+     echo "error1";
+ }
+ }
+ else{
+     $sql = "update steptracker set steps = '$steps',goal = '$goal' where dateandtime = '$dateandtime' and clientID = '$userID'";
+     if (mysqli_query($conn,$sql)) {
+       echo " prevoious updated 2nd";
+     }
+     else{
+         echo "error2";
+     }   
 }
-else{
-    echo "error";
-}
+
+
 
 
 ?>

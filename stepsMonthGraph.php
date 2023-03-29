@@ -1,23 +1,18 @@
 <?php
 
-$server="127.0.0.1:3307";
-$username="root";
-$password="";
-$database = "infits";
-
-$conn=mysqli_connect($server,$username,$password,$database);
+$conn=new mysqli("www.db4free.net","infits_free_test","EH6.mqRb9QBdY.U","infits_db");
 
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
 
-$from = date("Y-m-d", strtotime("2022-12-01"));
-$to = date("Y-m-d", strtotime("2022-12-31"));
+$from = date("Y-m-d", strtotime("first day of this month"));
+$to = date("Y-m-d", strtotime("last day of this month"));
 
+$clientID = $_POST['clientID'];
 
-
-$sql = "select steps,dateandtime from steptracker where clientID = 'Azarudeen' and dateandtime between '$from' and '$to';";
+$sql = "select steps,dateandtime from steptracker where clientID = '$clientID' and dateandtime between '$from' and '$to';";
 
 $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error($connection));
 

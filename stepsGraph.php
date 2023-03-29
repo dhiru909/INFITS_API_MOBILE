@@ -5,23 +5,23 @@ function date_compare($a, $b)
     $t2 = $b['date'];
     return $t1 - $t2;
 }
+$conn=new mysqli("www.db4free.net","infits_free_test","EH6.mqRb9QBdY.U","infits_db");
 
-require "connect.php";
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
 
 
-//$clientID = $_POST['clientuserID'];
+$clientID = $_POST['clientuserID'];
 
-$clientID = 'Azarudeen';
+// $clientID = 'dilip';
 
-$from = 2022-12-12;
+$from = date('Y-m-d', strtotime("-6 day"));
 
-//$from = $_POST["dateStart"];
+$to = date('Y-m-d');
 
-//$to = $_POST["dateEnd"];
-
-$to = 2022-12-18;
-
-$end = 2022-12-18;
+$end = date('Y-m-d',strtotime("1 day"));
 
 
 $sql = "SELECT * FROM steptracker where clientID = '$clientID' and cast(dateandtime as date) between '$from' and '$to' GROUP BY cast(dateandtime as date) order by dateandtime";

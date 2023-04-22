@@ -46,7 +46,11 @@ while($row =mysqli_fetch_assoc($result1))
 $responseArray["Goals"]=$empArray1;
 
 $calorieBurnt=mysqli_fetch_assoc($result2);
+if($calorieBurnt['sum(calorie_burnt)']==null){
+  $calorieBurnt['sum(calorie_burnt)']="0";
+}
 $responseArray["CalorieBurnt"]=$calorieBurnt['sum(calorie_burnt)'];
+
 // echo implode("",$calorieBurnt);
 
 $emparray = array();
@@ -55,53 +59,35 @@ $full=array();
 while($row =mysqli_fetch_assoc($result))
 {
           if($row['sum(caloriesconsumed)']==null){
-                    $emparray['caloriesconsumed'] = "0";
+            $row['sum(caloriesconsumed)'] = "0";
           }
-          else{
                     $emparray['caloriesconsumed'] = $row['sum(caloriesconsumed)'];
-          }
-
-
-
-          if($row['sum(caloriesconsumed)']==null){
-                    $emparray['caloriesconsumed'] = "0";
-          }
-          else{
-                    $emparray['caloriesconsumed'] = $row['sum(caloriesconsumed)'];
-          }
-
+       
 
 
           if($row['sum(carbs)']==null){
-                    $emparray['carbs'] = "0";
+            $row['sum(carbs)'] = "0";
           }
-          else{
                     $emparray['carbs'] = $row['sum(carbs)'];
-          }
+          
 
 
           if($row['sum(fiber)']==null){
-                    $emparray['fiber'] = "0";
+            $row['sum(fiber)'] = "0";
           }
-          else{
                     $emparray['fiber'] = $row['sum(fiber)'];
-          }
 
           
           if($row['sum(protein)']==null){
-                    $emparray['protein'] = "0";
+            $row['sum(protein)'] = "0";
           }
-          else{
                     $emparray['protein'] = $row['sum(protein)'];
-          }
 
 
           if($row['sum(fat)']==null){
-                    $emparray['fat'] = "0";
+            $row['sum(fat)'] = "0";
           }
-          else{
                     $emparray['fat'] = $row['sum(fat)'];
-          }
 }
 $responseArray["Values"]=$emparray;
 echo json_encode(['Data' => $responseArray]);

@@ -1,8 +1,6 @@
 <?php
 
-require "connect.php";
-
-$conn=mysqli_connect($server,$username,$password,$database);
+$conn=new mysqli("www.db4free.net","infits_free_test","EH6.mqRb9QBdY.U","infits_db");
 
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);

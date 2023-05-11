@@ -33,13 +33,14 @@ $result = mysqli_query($conn, $sql) or die("Error in Selecting " . mysqli_error(
 $result1 = mysqli_query($conn, $sql1) or die("Error in Selecting " . mysqli_error($connection));
 
 $result2 = mysqli_query($conn, $sql2) or die("Error in Selecting " . mysqli_error($connection));
-
 $empArray1 = array();
 $responseArray = array();
 while($row =mysqli_fetch_assoc($result1))
 {
           $empArray1['CarbsGoal'] = $row['Carbs'];
           $empArray1['fatsGoal'] = $row['fats'];
+          $empArray1['calorieConsumed']=$row['calorieConsumed'];
+          $empArray1['calorieBurnt']=$row['calorieBurnt'];
           $empArray1['ProteinGoal'] = $row['Protein'];
           $empArray1['FiberGoal'] = $row['Fiber'];   
 }
@@ -58,36 +59,37 @@ $emparray = array();
 $full=array();
 while($row =mysqli_fetch_assoc($result))
 {
+  // echo implode('',$row);
           if($row['sum(caloriesconsumed)']==null){
             $row['sum(caloriesconsumed)'] = "0";
           }
-                    $emparray['caloriesconsumed'] = $row['sum(caloriesconsumed)'];
+          $emparray['caloriesconsumed'] = $row['sum(caloriesconsumed)'];
        
 
 
           if($row['sum(carbs)']==null){
             $row['sum(carbs)'] = "0";
           }
-                    $emparray['carbs'] = $row['sum(carbs)'];
+          $emparray['carbs'] = $row['sum(carbs)'];
           
 
 
           if($row['sum(fiber)']==null){
             $row['sum(fiber)'] = "0";
           }
-                    $emparray['fiber'] = $row['sum(fiber)'];
+          $emparray['fiber'] = $row['sum(fiber)'];
 
           
           if($row['sum(protein)']==null){
             $row['sum(protein)'] = "0";
           }
-                    $emparray['protein'] = $row['sum(protein)'];
+          $emparray['protein'] = $row['sum(protein)'];
 
 
           if($row['sum(fat)']==null){
             $row['sum(fat)'] = "0";
           }
-                    $emparray['fat'] = $row['sum(fat)'];
+          $emparray['fat'] = $row['sum(fat)'];
 }
 $responseArray["Values"]=$emparray;
 echo json_encode(['Data' => $responseArray]);

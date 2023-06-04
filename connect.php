@@ -1,11 +1,11 @@
 <?php
 // Create 4 variables to store these information
-$server="127.0.0.1:3307";
-$username="root";
-$password="";
-$database = "infits";
+$server="www.db4free.net";
+$username="infits_free_test";
+$passwordd="EH6.mqRb9QBdY.U";
+$database = "infits_db";
 // Create connection
-$conn = new mysqli($server, $username, $password, $database);
+$conn = new mysqli($server, $username, $passwordd, $database);
 // Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);

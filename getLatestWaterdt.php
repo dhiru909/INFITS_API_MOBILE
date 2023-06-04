@@ -5,31 +5,27 @@ function date_compare($a, $b)
     $t2 = $b['date'];
     return $t2 - $t1;
 }
-$server = "127.0.0.1:3307";
-$username = "root";
-$password = "";
-$database = "infits";
-// Create connection
-$conn = mysqli_connect($server, $username, $password, $database);
+$conn=new mysqli("www.db4free.net","infits_free_test","EH6.mqRb9QBdY.U","infits_db");
+
+
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$clientID = $_POST['clientID'];
+$clientuserID = $_POST['clientuserID'];
+$date=$_POST['dateandtime'];
 
-$sql = "select drinkConsumed, goal, dateandtime from watertrackerdt where clientID='$clientID' and dateandtime=(
-    select max(dateandtime) from watertrackerdt where clientID='$clientID'
-)";
+$sql = "select sum(amount) x , sum(goal) y, dateandtime from watertracker where clientuserID='$clientuserID' and dateandtime ='$date' group by dateandtime";
 
 $result = mysqli_query($conn, $sql);
 
 $full = array();
 while ($row = mysqli_fetch_assoc($result)) {
 
-    $emparray['dateandtime'] = $row['dateandtime'];
-    $emparray['drinkConsumed'] = $row['drinkConsumed'];
-    $emparray['goal'] = $row['goal'];
+    $emparray['date'] = $row['dateandtime'];
+    $emparray['drinkConsumed'] = $row['x'];
+    $emparray['goal'] = $row['y'];
 
     $full[] = $emparray;
 }
@@ -37,6 +33,10 @@ while ($row = mysqli_fetch_assoc($result)) {
 // usort($full, 'date_compare');
 
 echo json_encode(['water' => $full]);
+
+
+
+
 // if (mysqli_num_rows($result) == 0) {
 //     $sql = "insert into watertrackerdt values('$consumed','$goal','$dateandtime','$userID','$type','$amount')";
 //     if (mysqli_query($conn, $sql)) {
@@ -48,9 +48,7 @@ echo json_encode(['water' => $full]);
 //     while ($row = mysqli_fetch_assoc($result)) {
 //         $liquid = $row['drinkConsumed'];
 //     }
-
 //     $liquid += $amount;
-
 //     $sql = "insert into watertrackerdt values('$liquid','$goal','$dateandtime','$userID','$type','$amount')";
 //     if (mysqli_query($conn, $sql)) {
 //         echo "updated";
@@ -58,3 +56,7 @@ echo json_encode(['water' => $full]);
 //         echo "error";
 //     }
 // }
+
+?>
+
+

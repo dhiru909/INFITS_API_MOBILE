@@ -1,13 +1,6 @@
 <?php 
     // Database connection details
-    $server = "127.0.0.1:3306";
-    $username = "root";
-    $password = "";
-    $database = "infits";
-
-    // Create connection
-    $conn = mysqli_connect($server, $username, $password, $database);
-
+    require "connect.php";
     $result = array();
 
     // Check for errors

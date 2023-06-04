@@ -1,17 +1,11 @@
 <?php
 
-$server="127.0.0.1:4307";
-$username="root";
-$password="";
-$database = "sample";
-
-$conn=mysqli_connect($server,$username,$password,$database);
-
+$conn=new mysqli("www.db4free.net","infits_free_test","EH6.mqRb9QBdY.U","infits_db");
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$userID = $_POST['userID'];
+$clientID = $_POST['clientID'];
 
 $i = $_POST['month'];
 
@@ -19,7 +13,7 @@ $i = $_POST['month'];
 
 // $i = 10;
 
-$sql = "select date from weighttracker where clientID='$userID'";
+$sql = "select date from weighttracker where clientID='$clientID'";
 
 $result = mysqli_query($conn, $sql);
 
@@ -40,7 +34,7 @@ else if($i == 0){
 else{
   $mon = 30;
 }
-  for($d=1; $d<=31; $d++)
+  for($d=1; $d<=$mon; $d++)
   {
     $time = mktime(0,0,0,date($i,strtotime("first day of $i")), $d,date('Y'));
       // $time=mktime(0, 0, 0, date("m",strtotime("first day of $i")), $d, date('Y'));

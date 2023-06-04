@@ -12,16 +12,18 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$clientID = $_POST['userID'];
-$dateandtime = date('Y-m-d h:i:s', strtotime($_POST['dateandtime']));
+$clientuserID = $_POST['clientuserID'];
+$dateandtime = $_POST['dateandtime'];
+echo $dateandtime;
 $goal = $_POST['goal'];
 $type = $_POST['type'];
 $amount = $_POST['amount'];
 $consumed = $_POST['consumed'];
+$clientID=$_POST['clientID'];
+$dietitian_id=$_POST['dietitian_id'];
 
-$sql = "select * from watertrackerdt where clientID='$clientID' and dateandtime=(
-    select max(dateandtime) from watertrackerdt where clientID='$clientID'
-)";
+
+$sql = "select * from watertracker where clientID='$clientID' and date = '$date' and type='$type'";
 
 $result = mysqli_query($conn, $sql);
 
@@ -38,23 +40,23 @@ $result = mysqli_query($conn, $sql);
 // echo json_encode(['water' => $full]);
 
 if (mysqli_num_rows($result) == 0) {
-    $sql = "insert into watertrackerdt values('$consumed','$goal','$dateandtime','$userID','$type','$amount')";
+    $sql = "insert into watertracker(drinkConsumed,goal,date,clientuserID,time,type,amount,clientID,dietitian_id) values('$consumed','0','$date','$clientuserID','$time','$type','$amount','$clientID','$dietitian_id')";
     if (mysqli_query($conn, $sql)) {
-        echo "inserted";
+        echo "inserted_add_liq";
     } else {
         echo "error";
     }
 } else {
     while ($row = mysqli_fetch_assoc($result)) {
         $liquid = $row['drinkConsumed'];
-        $date = $row['dateandtime'];
+	
     }
 
     $liquid += $amount;
 
-    $sql = "update watertrackerdt set drinkConsumed='$liquid' where clientID='$clientID' and dateandtime='$date'";
+    $sql = "update watertracker set amount='$amount',drinkConsumed='$liquid' where clientID='$clientID' and date='$date' and type='$type'";
     if (mysqli_query($conn, $sql)) {
-        echo "updated1";
+        echo "updated_add_liq";
     } else {
         echo "error";
     }

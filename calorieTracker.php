@@ -1,15 +1,5 @@
 <?php
-
-$server="127.0.0.1:3306";
-$username="root";
-$password="";
-$database = "infits";
-
-$conn=mysqli_connect($server,$username,$password,$database);
-
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
+require "connect.php";
 
 date_default_timezone_set("Asia/Calcutta");
 $today = date('Y-m-d');
@@ -22,7 +12,7 @@ $clientuserID = $_POST['clientID'];
 // $clientuserID = 'test';
 
 
-$sql = "select sum(caloriesconsumed),sum(carbs),sum(fiber),sum(protein),sum(fat) from calorietracker where clientID = '$clientuserID' and time between '$from' and '$date'";
+$sql = "select sum(caloriesconsumed),sum(carbs),sum(fiber),sum(protein),sum(fat) from calorietracker where clientuserID = '$clientuserID' and time between '$from' and '$date'";
 
 $sql1 = "select * from goals_client where clientuserID = '$clientuserID'";
 
